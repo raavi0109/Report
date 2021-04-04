@@ -1,0 +1,32 @@
+<mat-tab-group>
+    <mat-tab label="Weather">
+        <app-weather-report></app-weather-report>    
+        </mat-tab>
+    <mat-tab label="Forecast">
+        <div *ngIf="forecastResponse" fxLayout="row wrap" fxLayoutGap="32px"
+        fxLayoutAlign="space-between">
+            <ng-container *ngFor="let response of forecastResponse; let i = index">
+        <mat-card fxFlex="0 1 calc(33.3% - 32px)">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>Report at Time:  {{response.dt_txt}}</mat-card-title>
+            </mat-card-header>
+               <mat-card-content>
+                <img [src]="apiservice.getIconUrl(response.weather[0].icon)">
+              <p>
+               Sea level :    {{response.main.sea_level}}
+            </p>
+            <p>
+              Min Temp :    {{response.main.temp_max}}
+            </p>
+            <p>
+              Max Temp :    {{response.main.temp_min}}
+            </p>
+            </mat-card-content>
+        
+          </mat-card>   
+        </ng-container>
+           </div>
+    </mat-tab>
+  </mat-tab-group>
+
